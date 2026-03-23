@@ -41,7 +41,6 @@ async function extractPdfText(buffer: Buffer): Promise<string> {
  * OCR fallback for scanned PDFs that return empty text from pdf-parse.
  * Requires tesseract.js, pdfjs-dist, and canvas to be installed.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function extractPdfTextWithOcr(buffer: Buffer): Promise<string> {
   // Dynamic import of tesseract.js (optional dependency)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
