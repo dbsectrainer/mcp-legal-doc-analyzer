@@ -1,0 +1,43 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      dbPath:
+        type: string
+        description: "Path to SQLite database file"
+      confidenceThreshold:
+        type: number
+        description: "Minimum confidence score for clause detection"
+        default: 0.6
+      noHistory:
+        type: boolean
+        description: "Disable analysis history tracking"
+      templatesDir:
+        type: string
+        description: "Path to document templates directory"
+      clausePatterns:
+        type: string
+        description: "Path to custom clause patterns JSON file"
+      bulkConcurrency:
+        type: number
+        description: "Number of documents to analyze concurrently in bulk mode"
+        default: 4
+      ocr:
+        type: boolean
+        description: "Enable OCR for scanned documents"
+    required: []
+  commandFunction: |
+    (config) => ({
+      command: "node",
+      args: [
+        "dist/index.js",
+        ...(config.dbPath ? ["--db", config.dbPath] : []),
+        ...(config.confidenceThreshold ? ["--confidence-threshold", String(config.confidenceThreshold)] : []),
+        ...(config.noHistory ? ["--no-history"] : []),
+        ...(config.templatesDir ? ["--templates", config.templatesDir] : []),
+        ...(config.clausePatterns ? ["--clause-patterns", config.clausePatterns] : []),
+        ...(config.bulkConcurrency ? ["--bulk-concurrency", String(config.bulkConcurrency)] : []),
+        ...(config.ocr ? ["--ocr"] : [])
+      ]
+    })
