@@ -226,6 +226,6 @@ npm install && npm test
 This plugin is available on:
 
 - [MCP Registry](https://registry.modelcontextprotocol.io)
-- [MCP Marketplace](https://marketplace.modelcontextprotocol.io)
+- [MCP Market](https://mcpmarket.com)
 
 Search for `mcp-legal-doc-analyzer`.
