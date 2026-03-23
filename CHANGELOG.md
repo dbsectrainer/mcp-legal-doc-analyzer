@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.0] - 2026-03-23
+## [1.0.0] - 2026-03-12
 
 ### Added
 
+- `.env.example` documenting `MCP_API_KEY` and `MCP_JWT_SECRET`.
+- `engines: { "node": ">=20.19.0" }` added to `package.json`.
 - **`export_analysis_report` tool**: generates a self-contained HTML report with an inline clause table and risk findings, suitable for printing and sharing.
 - **`export_audit_log` tool**: exports the analysis audit log in `json` or `csv` format with optional ISO 8601 date-range filtering.
 - **`bulk_analyze` tool**: processes a portfolio of contract files in batch; emits `notifications/progress` per file and returns per-file results plus an aggregate summary.
@@ -20,13 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`--bulk-concurrency` flag**: controls parallel file processing in `bulk_analyze` (default: 4).
 - **`--ocr` flag**: enables OCR fallback via `tesseract.js` / `pdfjs-dist` / `canvas` for scanned PDFs with no text layer.
 - **`--http-port` flag**: starts the server in Streamable HTTP mode instead of stdio for shared team deployments.
-
-## [1.0.0] - 2026-03-12
-
-### Added
-
-- `.env.example` documenting `MCP_API_KEY` and `MCP_JWT_SECRET`.
-- `engines: { "node": ">=20.19.0" }` added to `package.json`.
 
 ### Changed
 
