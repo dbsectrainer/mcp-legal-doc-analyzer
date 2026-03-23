@@ -25,63 +25,63 @@ CREATE TABLE IF NOT EXISTS extracted_clauses (
 );
 `;
 export class LegalDb {
-  db;
-  constructor(dbPath) {
-    this.db = new Database(expandHome(dbPath));
-    this.db.exec(SCHEMA);
-  }
-  saveAnalysis(analysis) {
-    const stmt = this.db.prepare(`
+    db;
+    constructor(dbPath) {
+        this.db = new Database(expandHome(dbPath));
+        this.db.exec(SCHEMA);
+    }
+    saveAnalysis(analysis) {
+        const stmt = this.db.prepare(`
       INSERT OR REPLACE INTO document_analyses
         (id, file_path, file_hash, file_type, analyzed_at, clause_count, risk_count, template_used)
       VALUES
         (@id, @file_path, @file_hash, @file_type, @analyzed_at, @clause_count, @risk_count, @template_used)
     `);
-    stmt.run({
-      ...analysis,
-      // better-sqlite3 requires null (not undefined) for nullable columns
-      template_used: analysis.template_used ?? null,
-    });
-  }
-  saveClauses(analysisId, clauses) {
-    const stmt = this.db.prepare(`
+        stmt.run({
+            ...analysis,
+            // better-sqlite3 requires null (not undefined) for nullable columns
+            template_used: analysis.template_used ?? null,
+        });
+    }
+    saveClauses(analysisId, clauses) {
+        const stmt = this.db.prepare(`
       INSERT OR REPLACE INTO extracted_clauses
         (id, analysis_id, clause_type, text, confidence, low_confidence)
       VALUES
         (@id, @analysis_id, @clause_type, @text, @confidence, @low_confidence)
     `);
-    const insertMany = this.db.transaction((rows) => {
-      for (const row of rows) {
-        stmt.run(row);
-      }
-    });
-    insertMany(
-      clauses.map((c, i) => ({
-        id: `${analysisId}-${i}`,
-        analysis_id: analysisId,
-        clause_type: c.type,
-        text: c.text,
-        confidence: c.confidence,
-        low_confidence: c.low_confidence ? 1 : 0,
-      })),
-    );
-  }
-  getAnalysis(id) {
-    const row = this.db.prepare("SELECT * FROM document_analyses WHERE id = ?").get(id);
-    return row;
-  }
-  listAnalyses() {
-    const rows = this.db
-      .prepare("SELECT * FROM document_analyses ORDER BY analyzed_at DESC")
-      .all();
-    return rows;
-  }
-  close() {
-    this.db.close();
-  }
+        const insertMany = this.db.transaction((rows) => {
+            for (const row of rows) {
+                stmt.run(row);
+            }
+        });
+        insertMany(clauses.map((c, i) => ({
+            id: `${analysisId}-${i}`,
+            analysis_id: analysisId,
+            clause_type: c.type,
+            text: c.text,
+            confidence: c.confidence,
+            low_confidence: c.low_confidence ? 1 : 0,
+        })));
+    }
+    getAnalysis(id) {
+        const row = this.db
+            .prepare("SELECT * FROM document_analyses WHERE id = ?")
+            .get(id);
+        return row;
+    }
+    listAnalyses() {
+        const rows = this.db
+            .prepare("SELECT * FROM document_analyses ORDER BY analyzed_at DESC")
+            .all();
+        return rows;
+    }
+    close() {
+        this.db.close();
+    }
 }
 export async function createDb(dbPath) {
-  const resolvedPath = expandHome(dbPath);
-  await mkdir(dirname(resolvedPath), { recursive: true });
-  return new LegalDb(resolvedPath);
+    const resolvedPath = expandHome(dbPath);
+    await mkdir(dirname(resolvedPath), { recursive: true });
+    return new LegalDb(resolvedPath);
 }

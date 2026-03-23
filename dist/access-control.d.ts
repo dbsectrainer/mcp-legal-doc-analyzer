@@ -10,8 +10,4 @@
  * @param agentId    The agent identifier (from API key or JWT sub claim)
  * @param policyPath Optional override path to the YAML policy file
  */
-export declare function canAnalyze(
-  docType: string,
-  agentId: string,
-  policyPath?: string,
-): boolean;
+export declare function canAnalyze(docType: string, agentId: string, policyPath?: string): boolean;

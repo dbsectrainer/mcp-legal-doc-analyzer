@@ -8,15 +8,18 @@ const DEFAULT_POLICY_PATH = join(homedir(), ".mcp", "legal-access-policy.yaml");
  * file does not exist or cannot be parsed.
  */
 function loadPolicies(policyPath) {
-  if (!existsSync(policyPath)) return [];
-  try {
-    const raw = readFileSync(policyPath, "utf-8");
-    const parsed = yaml.load(raw);
-    if (!parsed || !Array.isArray(parsed.policies)) return [];
-    return parsed.policies;
-  } catch {
-    return [];
-  }
+    if (!existsSync(policyPath))
+        return [];
+    try {
+        const raw = readFileSync(policyPath, "utf-8");
+        const parsed = yaml.load(raw);
+        if (!parsed || !Array.isArray(parsed.policies))
+            return [];
+        return parsed.policies;
+    }
+    catch {
+        return [];
+    }
 }
 /**
  * Check whether an agent is allowed to analyze a given document type.
@@ -31,20 +34,20 @@ function loadPolicies(policyPath) {
  * @param policyPath Optional override path to the YAML policy file
  */
 export function canAnalyze(docType, agentId, policyPath) {
-  const resolvedPath = policyPath ?? DEFAULT_POLICY_PATH;
-  const policies = loadPolicies(resolvedPath);
-  const policy = policies.find((p) => p.agent_id === agentId);
-  if (!policy) {
-    // No policy for this agent → allow by default
+    const resolvedPath = policyPath ?? DEFAULT_POLICY_PATH;
+    const policies = loadPolicies(resolvedPath);
+    const policy = policies.find((p) => p.agent_id === agentId);
+    if (!policy) {
+        // No policy for this agent → allow by default
+        return true;
+    }
+    // Deny takes precedence over allow
+    if (policy.deny_doc_types && policy.deny_doc_types.includes(docType)) {
+        return false;
+    }
+    if (policy.allow_doc_types) {
+        return policy.allow_doc_types.includes(docType);
+    }
+    // Policy exists but no allow_doc_types specified → allow
     return true;
-  }
-  // Deny takes precedence over allow
-  if (policy.deny_doc_types && policy.deny_doc_types.includes(docType)) {
-    return false;
-  }
-  if (policy.allow_doc_types) {
-    return policy.allow_doc_types.includes(docType);
-  }
-  // Policy exists but no allow_doc_types specified → allow
-  return true;
 }
