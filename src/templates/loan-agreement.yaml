@@ -1,0 +1,82 @@
+name: Loan Agreement
+description: >
+  Compliance checklist for commercial loan agreements. Covers principal
+  and interest terms, repayment schedule, security/collateral, events of
+  default, representations, and governing law.
+version: "1.0"
+rules:
+  - id: loan_payment_terms
+    description: Principal amount, interest rate, and repayment schedule defined
+    clause_type: payment_terms
+    flag_if_missing: true
+    severity: critical
+    message: >
+      A loan agreement must specify the principal amount, interest rate
+      (fixed or variable), and repayment schedule including due dates.
+
+  - id: loan_interest_rate
+    description: Interest rate clearly stated
+    clause_type: payment_terms
+    pattern: "interest rate|per annum|% per|annual.*rate|rate.*interest"
+    flag_if_missing: false
+    severity: critical
+    message: >
+      The interest rate must be clearly stated. Ambiguous or missing interest
+      terms can render the agreement unenforceable or create usury risk.
+
+  - id: loan_security_collateral
+    description: Security or collateral provisions addressed
+    clause_type: liability
+    pattern: "collateral|security interest|pledge|lien|mortgage|charge"
+    flag_if_missing: false
+    severity: high
+    message: >
+      If the loan is secured, the collateral and security interest must be
+      clearly described. Unsecured loans should state this explicitly.
+
+  - id: loan_events_of_default
+    description: Events of default defined
+    clause_type: termination
+    pattern: "event.*default|default.*event|acceleration|cross.default"
+    flag_if_missing: false
+    severity: critical
+    message: >
+      Events of default (missed payments, insolvency, cross-default) must be
+      clearly defined along with the lender's remedies upon default.
+
+  - id: loan_representations_warranties
+    description: Borrower representations and warranties present
+    clause_type: warranty
+    flag_if_missing: true
+    severity: high
+    message: >
+      The borrower should make representations and warranties regarding
+      capacity, authority, financial condition, and absence of litigation.
+
+  - id: loan_governing_law
+    description: Governing law and jurisdiction specified
+    clause_type: governing_law
+    flag_if_missing: true
+    severity: high
+    message: >
+      Specify the governing law and jurisdiction for dispute resolution,
+      particularly important for cross-border lending arrangements.
+
+  - id: loan_dispute_resolution
+    description: Dispute resolution mechanism specified
+    clause_type: dispute_resolution
+    flag_if_missing: true
+    severity: medium
+    message: >
+      Define the dispute resolution mechanism (litigation, arbitration, or
+      mediation) and the venue for resolving disputes.
+
+  - id: loan_prepayment
+    description: Prepayment terms addressed
+    clause_type: payment_terms
+    pattern: "prepay|early repay|prepayment.*penalt|make.whole"
+    flag_if_missing: false
+    severity: medium
+    message: >
+      Prepayment rights and any associated penalties or make-whole provisions
+      should be explicitly addressed to avoid disputes.

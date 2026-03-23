@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a reproducible defect in mcp-legal-doc-analyzer
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please provide enough detail for maintainers to reproduce and fix the issue.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One-sentence description of the problem
+      placeholder: The server crashes when...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the exact steps, inputs, and config needed to reproduce the issue
+      placeholder: |
+        1. Configure...
+        2. Run...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and screenshots
+      description: Paste relevant logs, stack traces, or screenshots
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: 0.1.0
+  - type: input
+    id: node
+    attributes:
+      label: Node.js version
+      placeholder: 20.19.0
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, MCP client, deployment mode, and anything else relevant
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I searched existing issues before opening this bug report
+          required: true
+        - label: I can reproduce this issue on the latest code or published package
+          required: true

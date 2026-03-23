@@ -1,0 +1,54 @@
+name: Vendor Agreement
+description: "Vendor / supplier agreement checklist"
+version: "1.0.0"
+rules:
+  - id: payment_terms_present
+    description: "Payment terms defined"
+    clause_type: payment_terms
+    severity: high
+    message: "No payment terms found. Pricing, invoicing, and due-date obligations are unclear."
+    flag_if_missing: true
+
+  - id: late_payment_penalty
+    description: "Late payment penalty or interest"
+    clause_type: payment_terms
+    pattern: "late|penalty|interest|overdue"
+    severity: medium
+    message: "Late payment penalty or interest clause found. Review payment schedule carefully."
+    flag_if_missing: false
+
+  - id: ip_ownership
+    description: "IP ownership for deliverables"
+    clause_type: intellectual_property
+    severity: critical
+    message: "No IP ownership clause found. Ownership of vendor-created deliverables is unclear."
+    flag_if_missing: true
+
+  - id: confidentiality_present
+    description: "Confidentiality / NDA obligations"
+    clause_type: confidentiality
+    severity: high
+    message: "No confidentiality clause found. Sensitive business information may be unprotected."
+    flag_if_missing: true
+
+  - id: termination_for_convenience
+    description: "Termination for convenience"
+    clause_type: termination
+    pattern: "convenience|without cause|at.will|at will"
+    severity: medium
+    message: "Termination for convenience clause found. Either party may exit without cause."
+    flag_if_missing: false
+
+  - id: liability_limitation
+    description: "Limitation of liability"
+    clause_type: liability
+    severity: high
+    message: "No limitation of liability clause found. Exposure to uncapped damages."
+    flag_if_missing: true
+
+  - id: dispute_resolution_present
+    description: "Dispute resolution mechanism"
+    clause_type: dispute_resolution
+    severity: low
+    message: "No dispute resolution clause found. Default legal remedies apply."
+    flag_if_missing: true

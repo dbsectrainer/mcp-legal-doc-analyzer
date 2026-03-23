@@ -1,0 +1,26 @@
+name: NDA
+description: "Non-Disclosure Agreement checklist"
+version: "1.0.0"
+rules:
+  - id: mutual_nda
+    description: "Check if NDA is mutual or one-sided"
+    clause_type: confidentiality
+    pattern: "mutual|both parties"
+    severity: medium
+    message: "NDA appears to be one-sided. Consider negotiating mutual terms."
+    flag_if_missing: false
+
+  - id: term_duration
+    description: "Confidentiality term should be specified"
+    clause_type: termination
+    severity: high
+    message: "No explicit confidentiality duration found. Recommend adding a specific term."
+    flag_if_missing: true
+
+  - id: unlimited_liability
+    description: "Check for unlimited liability clauses"
+    clause_type: liability
+    pattern: "unlimited|without limit|no cap"
+    severity: critical
+    message: "Contract contains potentially unlimited liability provisions."
+    flag_if_missing: false

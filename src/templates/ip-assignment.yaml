@@ -1,0 +1,73 @@
+name: IP Assignment
+description: >
+  Compliance checklist for Intellectual Property Assignment agreements.
+  Covers scope of assignment, moral rights, warranties of ownership,
+  consideration, and retained licences.
+version: "1.0"
+rules:
+  - id: ip_assignment_clause
+    description: IP assignment clause present
+    clause_type: intellectual_property
+    flag_if_missing: true
+    severity: critical
+    message: >
+      An IP Assignment agreement must contain an explicit assignment clause
+      transferring ownership of the specified intellectual property.
+
+  - id: ip_scope_defined
+    description: Scope of assigned IP clearly defined
+    clause_type: intellectual_property
+    pattern: "assign.*all.*right|all.*right.*title.*interest|hereby.*assign"
+    flag_if_missing: false
+    severity: high
+    message: >
+      The scope of the assignment must be clearly defined. Use "all right,
+      title, and interest" language and enumerate the specific IP being assigned.
+
+  - id: ip_consideration
+    description: Consideration for the assignment specified
+    clause_type: payment_terms
+    flag_if_missing: true
+    severity: high
+    message: >
+      An assignment requires consideration to be enforceable. Specify the
+      payment, equity, or other consideration provided in exchange for the IP.
+
+  - id: ip_warranty_of_ownership
+    description: Assignor warrants ownership and right to assign
+    clause_type: warranty
+    pattern: "warrant.*own|own.*warrant|right to assign|no.*encumbran"
+    flag_if_missing: false
+    severity: high
+    message: >
+      The assignor should warrant that they own the IP free and clear of
+      encumbrances and have the right to assign it.
+
+  - id: ip_moral_rights
+    description: Moral rights waiver addressed
+    clause_type: intellectual_property
+    pattern: "moral right|waive.*moral|droit moral"
+    flag_if_missing: false
+    severity: medium
+    message: >
+      In jurisdictions recognising moral rights (e.g. UK, EU), the assignor
+      should waive moral rights to the extent permitted by law.
+
+  - id: ip_retained_licence
+    description: Any retained licence back to assignor addressed
+    clause_type: intellectual_property
+    pattern: "licen.*back|retain.*licen|licence.*back|royalty.free.*licen"
+    flag_if_missing: false
+    severity: low
+    message: >
+      If the assignor needs to continue using the IP, a licence-back should
+      be explicitly granted to avoid infringement claims.
+
+  - id: ip_governing_law
+    description: Governing law specified
+    clause_type: governing_law
+    flag_if_missing: true
+    severity: medium
+    message: >
+      Specify the governing law for the assignment, as IP rights are
+      territorial and jurisdiction-specific.

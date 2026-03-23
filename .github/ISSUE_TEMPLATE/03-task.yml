@@ -1,0 +1,38 @@
+name: Task
+description: Track a scoped piece of work for mcp-legal-doc-analyzer
+title: "[Task]: "
+labels:
+  - task
+body:
+  - type: input
+    id: objective
+    attributes:
+      label: Objective
+      placeholder: Update the CLI to validate...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why does this work matter now?
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: List the concrete outputs expected from this task
+      placeholder: |
+        - Update implementation
+        - Add tests
+        - Refresh README
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies or blockers
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification plan
+      description: How will reviewers confirm this task is complete?

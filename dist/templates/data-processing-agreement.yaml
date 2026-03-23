@@ -1,0 +1,84 @@
+name: Data Processing Agreement
+description: >
+  Compliance checklist for Data Processing Agreements (DPAs) under GDPR
+  and equivalent data protection regulations. Covers controller/processor
+  obligations, data subject rights, security measures, and breach notification.
+version: "1.0"
+rules:
+  - id: dpa_data_protection_clause
+    description: Data protection obligations clause present
+    clause_type: data_protection
+    flag_if_missing: true
+    severity: critical
+    message: >
+      A DPA must contain explicit data protection obligations. Add a clause
+      defining the scope of processing, lawful basis, and controller/processor roles.
+
+  - id: dpa_purpose_limitation
+    description: Purpose limitation — processing restricted to specified purposes
+    clause_type: data_protection
+    pattern: "purpose|processing.*limited|only.*process"
+    flag_if_missing: false
+    severity: high
+    message: >
+      GDPR Article 5(1)(b) requires purpose limitation. Ensure the agreement
+      restricts processing to the specific purposes listed.
+
+  - id: dpa_data_subject_rights
+    description: Data subject rights procedures defined
+    clause_type: data_protection
+    pattern: "data subject|right to access|right to erasure|right to rectif"
+    flag_if_missing: false
+    severity: high
+    message: >
+      The DPA must describe how the processor will assist the controller in
+      fulfilling data subject rights requests (access, erasure, rectification).
+
+  - id: dpa_security_measures
+    description: Technical and organisational security measures specified
+    clause_type: data_protection
+    pattern: "security measure|technical.*organisational|encryption|pseudonymis"
+    flag_if_missing: false
+    severity: high
+    message: >
+      GDPR Article 32 requires appropriate technical and organisational measures.
+      Specify encryption, access controls, and other safeguards.
+
+  - id: dpa_breach_notification
+    description: Data breach notification obligation present
+    clause_type: data_protection
+    pattern: "breach.*notif|notif.*breach|72 hour|seventy.two"
+    flag_if_missing: false
+    severity: critical
+    message: >
+      GDPR Article 33 requires breach notification to the supervisory authority
+      within 72 hours. Ensure the processor's notification obligation is explicit.
+
+  - id: dpa_sub_processor
+    description: Sub-processor authorisation and obligations addressed
+    clause_type: data_protection
+    pattern: "sub.processor|subprocessor|third.party.*process"
+    flag_if_missing: false
+    severity: medium
+    message: >
+      GDPR Article 28(2) requires prior written authorisation for sub-processors.
+      Ensure the agreement addresses sub-processor engagement and flow-down obligations.
+
+  - id: dpa_governing_law
+    description: Governing law and jurisdiction specified
+    clause_type: governing_law
+    flag_if_missing: true
+    severity: medium
+    message: >
+      Specify the governing law and jurisdiction for the DPA, particularly
+      important for cross-border data transfers.
+
+  - id: dpa_termination_deletion
+    description: Data deletion or return on termination
+    clause_type: termination
+    pattern: "delet|return.*data|destroy.*data|data.*return"
+    flag_if_missing: false
+    severity: high
+    message: >
+      GDPR Article 28(3)(g) requires the processor to delete or return all
+      personal data upon termination of the agreement.

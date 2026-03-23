@@ -1,0 +1,72 @@
+{
+  "name": "mcp-legal-doc-analyzer",
+  "version": "1.0.0",
+  "description": "Domain-specific MCP tooling for legal document workflows",
+  "author": "dbsectrainer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbsectrainer/mcp-legal-doc-analyzer.git"
+  },
+  "homepage": "https://github.com/dbsectrainer/mcp-legal-doc-analyzer#readme",
+  "type": "module",
+  "bin": {
+    "mcp-legal-doc-analyzer": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "legal",
+    "contract-analysis",
+    "document-ai"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "tsc && node -e \"import('fs').then(fs=>fs.promises.cp('src/templates','dist/templates',{recursive:true}))\"",
+    "test": "vitest run",
+    "dev": "tsx src/index.ts",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "lint": "eslint src tests",
+    "format": "prettier --write src tests",
+    "format:check": "prettier --check src tests"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "better-sqlite3": "^12.6.2",
+    "express": "^5.2.1",
+    "js-yaml": "^4.1.0",
+    "mammoth": "^1.12.0",
+    "pdf-parse": "^2.4.5"
+  },
+  "optionalDependencies": {
+    "canvas": "^3.1.0",
+    "pdfjs-dist": "^4.10.38",
+    "tesseract.js": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.0.0",
+    "@types/express": "^5.0.6",
+    "@types/js-yaml": "^4.0.0",
+    "@types/node": "^24.12.0",
+    "@types/yargs": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.0",
+    "yargs": "^18.0.0"
+  }
+}

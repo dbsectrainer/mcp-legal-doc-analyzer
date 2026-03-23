@@ -1,0 +1,48 @@
+name: Feature request
+description: Propose an enhancement for mcp-legal-doc-analyzer
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the user problem first, then the proposed solution. Keep scope concrete.
+  - type: input
+    id: problem
+    attributes:
+      label: Problem statement
+      placeholder: Teams cannot...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Explain the desired behavior and user-facing outcome
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Note workarounds or other approaches you evaluated
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and impact
+      description: Call out affected commands, tools, configs, or workflows
+  - type: textarea
+    id: success
+    attributes:
+      label: Success criteria
+      description: What would make this feature complete?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I searched existing issues and discussions before opening this request
+          required: true
+        - label: This request describes a concrete user need, not just an implementation preference
+          required: true

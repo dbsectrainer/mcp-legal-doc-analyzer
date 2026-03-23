@@ -1,0 +1,47 @@
+name: Software License Agreement
+description: "Software license agreement checklist"
+version: "1.0.0"
+rules:
+  - id: license_scope
+    description: "License grant and scope"
+    clause_type: intellectual_property
+    severity: high
+    message: "No intellectual property or license grant clause found. Scope of permitted use is unclear."
+    flag_if_missing: true
+
+  - id: warranty_disclaimer
+    description: "Warranty disclaimer (AS-IS)"
+    clause_type: warranty
+    pattern: "as.is|as is|no warrant|disclaim"
+    severity: medium
+    message: "No AS-IS warranty disclaimer found. Licensor may have implied warranty obligations."
+    flag_if_missing: true
+
+  - id: liability_cap
+    description: "Limitation of liability cap"
+    clause_type: liability
+    severity: high
+    message: "No limitation of liability clause found. Licensor may be exposed to uncapped damages."
+    flag_if_missing: true
+
+  - id: unlimited_liability
+    description: "Check for unlimited liability provisions"
+    clause_type: liability
+    pattern: "unlimited|without limit|no cap"
+    severity: critical
+    message: "Contract contains potentially unlimited liability provisions — review carefully."
+    flag_if_missing: false
+
+  - id: governing_law_present
+    description: "Governing law specified"
+    clause_type: governing_law
+    severity: medium
+    message: "No governing law clause found. Jurisdiction for disputes is unclear."
+    flag_if_missing: true
+
+  - id: termination_for_breach
+    description: "Termination on breach"
+    clause_type: termination
+    severity: medium
+    message: "No termination clause found. Licensor may have difficulty revoking access upon breach."
+    flag_if_missing: true

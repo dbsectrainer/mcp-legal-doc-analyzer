@@ -1,0 +1,32 @@
+name: Publish Pre-release
+
+on:
+  push:
+    tags:
+      - "v*-alpha.*"
+      - "v*-beta.*"
+      - "v*-rc.*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish-prerelease:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Build package
+        run: npm run build
+      - name: Publish pre-release
+        run: npm publish --tag next --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,27 @@
+name: SaaS Customer Agreement
+description: "SaaS customer checklist"
+version: "1.0.0"
+rules:
+  - id: sla
+    description: "Service level agreement"
+    clause_type: warranty
+    pattern: "sla|service level|uptime|availability"
+    severity: high
+    message: "No SLA or uptime guarantee found."
+    flag_if_missing: true
+
+  - id: data_ownership
+    description: "Customer data ownership"
+    clause_type: intellectual_property
+    pattern: "customer data|your data|data ownership"
+    severity: critical
+    message: "Data ownership terms need review."
+    flag_if_missing: true
+
+  - id: auto_renewal
+    description: "Auto-renewal clause"
+    clause_type: termination
+    pattern: "auto.renew|automatic renewal"
+    severity: medium
+    message: "Auto-renewal clause found. Note cancellation requirements."
+    flag_if_missing: false

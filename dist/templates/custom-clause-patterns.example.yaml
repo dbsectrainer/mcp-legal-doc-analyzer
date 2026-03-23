@@ -1,0 +1,50 @@
+# Custom Clause Patterns — Example
+#
+# Place this file (or a copy) anywhere and pass its path via the
+# --clause-patterns flag (or CLAUSE_PATTERNS_FILE env var) to extend
+# or override the built-in clause pattern definitions.
+#
+# Each entry defines a clause type name, one or more regex patterns
+# (case-insensitive), and a base confidence score (0.0–1.0).
+# Multiple pattern matches in the same section boost confidence by 0.05 each.
+#
+# Custom names override built-ins with the same name.
+#
+# Optional: confidence_threshold (0.0–1.0)
+#   Sets a per-clause-type minimum confidence required to include a match.
+#   Overrides the global --confidence-threshold for this clause type only.
+#   If omitted, the global threshold applies.
+
+- name: non_compete
+  patterns:
+    - "non.compete"
+    - "non.solicitation"
+    - "covenant not to compete"
+    - "restrictive covenant"
+  base_confidence: 0.85
+  # Require higher certainty for non-compete clauses (legal risk is high)
+  confidence_threshold: 0.80
+
+- name: change_of_control
+  patterns:
+    - "change of control"
+    - "change-of-control"
+    - "acquisition.*trigger"
+    - "merger.*trigger"
+  base_confidence: 0.85
+
+- name: most_favoured_nation
+  patterns:
+    - "most favou?red nation"
+    - "\\bMFN\\b"
+    - "most favou?red customer"
+  base_confidence: 0.8
+  # Lower threshold — even a single MFN mention is worth surfacing
+  confidence_threshold: 0.70
+
+- name: liquidated_damages
+  patterns:
+    - "liquidated damages"
+    - "agreed damages"
+    - "penalty clause"
+  base_confidence: 0.85

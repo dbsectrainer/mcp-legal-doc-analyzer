@@ -1,0 +1,26 @@
+name: Employment Agreement
+description: "Employment agreement checklist"
+version: "1.0.0"
+rules:
+  - id: non_compete
+    description: "Non-compete clause check"
+    clause_type: intellectual_property
+    pattern: "non.compete|non.solicitation"
+    severity: high
+    message: "Non-compete or non-solicitation clause found. Review scope and duration."
+    flag_if_missing: false
+
+  - id: at_will
+    description: "At-will employment"
+    clause_type: termination
+    pattern: "at.will|at will"
+    severity: medium
+    message: "At-will employment clause. Either party may terminate at any time."
+    flag_if_missing: false
+
+  - id: ip_assignment
+    description: "IP assignment clause"
+    clause_type: intellectual_property
+    severity: critical
+    message: "No IP assignment clause found. Ownership of work product is unclear."
+    flag_if_missing: true

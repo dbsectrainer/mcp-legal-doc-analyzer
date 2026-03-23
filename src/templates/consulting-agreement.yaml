@@ -1,0 +1,61 @@
+name: Consulting Agreement
+description: "Consulting / professional services agreement checklist"
+version: "1.0.0"
+rules:
+  - id: ip_assignment_consulting
+    description: "Work product IP assignment"
+    clause_type: intellectual_property
+    severity: critical
+    message: "No IP assignment clause found. Ownership of consulting deliverables is unclear."
+    flag_if_missing: true
+
+  - id: non_compete_consulting
+    description: "Non-compete or non-solicitation clause"
+    clause_type: intellectual_property
+    pattern: "non.compete|non.solicitation|non compete|non solicitation"
+    severity: high
+    message: "Non-compete or non-solicitation clause found. Review scope, geography, and duration."
+    flag_if_missing: false
+
+  - id: payment_consulting
+    description: "Compensation and payment terms"
+    clause_type: payment_terms
+    severity: high
+    message: "No payment or compensation clause found. Consultant remuneration is undefined."
+    flag_if_missing: true
+
+  - id: confidentiality_consulting
+    description: "Confidentiality obligations"
+    clause_type: confidentiality
+    severity: high
+    message: "No confidentiality clause found. Client proprietary information may be unprotected."
+    flag_if_missing: true
+
+  - id: termination_notice
+    description: "Termination notice requirements"
+    clause_type: termination
+    severity: medium
+    message: "No termination clause found. Notice period for ending engagement is undefined."
+    flag_if_missing: true
+
+  - id: liability_indemnification
+    description: "Indemnification obligations"
+    clause_type: liability
+    pattern: "indemnif"
+    severity: medium
+    message: "Indemnification obligations found. Review scope and limits of indemnification."
+    flag_if_missing: false
+
+  - id: liability_cap_consulting
+    description: "Limitation of liability"
+    clause_type: liability
+    severity: high
+    message: "No limitation of liability clause found. Consulting firm may face uncapped exposure."
+    flag_if_missing: true
+
+  - id: dispute_consulting
+    description: "Dispute resolution mechanism"
+    clause_type: dispute_resolution
+    severity: low
+    message: "No dispute resolution clause found. Default legal remedies will apply."
+    flag_if_missing: true
