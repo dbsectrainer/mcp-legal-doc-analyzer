@@ -5,6 +5,22 @@ All notable changes to MCP Legal Document Analyzer will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0 (2026-03-23)
+
+
+### Features
+
+* add mcpName and prepublishOnly for npm/registry publication ([587083d](https://github.com/dbsectrainer/mcp-legal-doc-analyzer/commit/587083d8e61a9d9f1f00ab8cd005373c55a4ae13))
+* add server.json for official MCP registry ([44a86d1](https://github.com/dbsectrainer/mcp-legal-doc-analyzer/commit/44a86d13f0ec1828372220a752c1c66a962e9346))
+* add smithery.yaml for Smithery deployment ([cabb1f1](https://github.com/dbsectrainer/mcp-legal-doc-analyzer/commit/cabb1f1a9f63447d8f30993164418d4a4608e878))
+* initial release v1.0.0 ([5dc13e8](https://github.com/dbsectrainer/mcp-legal-doc-analyzer/commit/5dc13e8ada155774bab0af4bea0b09249d752e36))
+
+
+### Bug Fixes
+
+* **ci:** regenerate package-lock.json to sync with package.json ([20cd05d](https://github.com/dbsectrainer/mcp-legal-doc-analyzer/commit/20cd05db8e0509375936614c747c1745efbffd56))
+* remove unused import and stale eslint-disable directive ([9a1a2f7](https://github.com/dbsectrainer/mcp-legal-doc-analyzer/commit/9a1a2f7769483b1e5deabe93175a7bd89648eb6c))
+
 ## [Unreleased]
 
 ## [1.0.0] - 2026-03-12
