@@ -1,7 +1,7 @@
 {
   "name": "mcp-legal-doc-analyzer",
   "mcpName": "io.github.dbsectrainer/mcp-legal-doc-analyzer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Domain-specific MCP tooling for legal document workflows",
   "author": "dbsectrainer",
   "license": "MIT",
@@ -47,7 +47,8 @@
     "express": "^5.2.1",
     "js-yaml": "^4.3.2",
     "mammoth": "^1.12.0",
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "^2.4.5",
+    "yargs": "^18.0.0"
   },
   "optionalDependencies": {
     "canvas": "^3.1.0",
@@ -68,7 +69,6 @@
     "prettier": "^3.0.0",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0",
-    "vitest": "^4.1.11",
-    "yargs": "^18.0.0"
+    "vitest": "^4.1.11"
   }
 }
